@@ -8,11 +8,18 @@ public class LinkedList<T> {
         this.tail = null;
     }
 
+    public synchronized Node<T> getHead(){
+        return head;
+    }
+    public int length(){
+        return size;
+    }
+
     public boolean isEmpty(){
         return size == 0;
     }
 
-    public LinkedList<T> push(T value){
+    public synchronized LinkedList<T> push(T value){
         head = new Node<>(value, head);
         if (tail == null) {
             tail = head;
@@ -21,7 +28,7 @@ public class LinkedList<T> {
         return this;
     }
 
-    public void append(T value) {
+    public synchronized void append(T value) {
         if (isEmpty()) {
             push(value);
             return;
@@ -52,6 +59,55 @@ public class LinkedList<T> {
             currentIndex++;
         }
         return currentNode;
+    }
+
+    public T pop() {
+        if (isEmpty()) return null;
+
+        T result = head.getData();
+        head = head.getNext();
+        size--;
+        if (isEmpty()) {
+            tail = null;
+        }
+
+        return result;
+    }
+
+    public T removeLast() {
+        Node<T> head = this.head != null ? this.head : null;
+
+        if (head == null) return null;
+
+        if (head.getNext() == null) return pop();
+
+        size--;
+
+        Node<T> previous = head;
+        Node<T> current = head;
+
+        Node<T> next = current.getNext();
+        while (next != null) {
+            previous = current;
+            current = next;
+            next = current.getNext();
+        }
+
+        previous.setNext(null);
+        tail = previous;
+        return current.getData();
+    }
+
+    public T removeAfter(Node<T> node){
+        T result = node.getNext().getData();
+        if (node.getNext() == tail) {
+            tail = node;
+        }
+        if (node.getNext() != null) {
+            size--;
+        }
+        node.setNext(node.getNext().getNext());
+        return result;
     }
 
     /**
