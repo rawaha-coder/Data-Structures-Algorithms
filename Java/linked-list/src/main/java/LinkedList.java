@@ -1,4 +1,7 @@
-public class LinkedList<T> {
+import java.util.Collection;
+import java.util.Iterator;
+
+public class LinkedList<T> implements Collection<T> {
     private Node<T> head;
     private Node<T> tail;
     private int size = 0;
@@ -10,13 +13,6 @@ public class LinkedList<T> {
 
     public synchronized Node<T> getHead(){
         return head;
-    }
-    public int length(){
-        return size;
-    }
-
-    public boolean isEmpty(){
-        return size == 0;
     }
 
     public synchronized LinkedList<T> push(T value){
@@ -110,6 +106,106 @@ public class LinkedList<T> {
         return result;
     }
 
+    @Override
+    public int size() {
+        return size;
+    }
+
+    @Override
+    public boolean isEmpty(){
+        return size == 0;
+    }
+
+    @Override
+    public boolean contains(Object o) {
+        for (T item : this) {
+            if (item == o) return true;
+        }
+        return false;
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new LinkedListIterator<>(this);
+    }
+
+    @Override
+    public Object[] toArray() {
+        return new Object[0];
+    }
+
+    @Override
+    public <T1> T1[] toArray(T1[] a) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public boolean add(T t) {
+        append(t);
+        return true;
+    }
+
+    @Override
+    public boolean remove(Object o) {
+        Iterator<T> iterator = iterator();
+        while (iterator.hasNext()) {
+            T item = iterator.next();
+            if (item == o) {
+                iterator.remove();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean removeAll(Collection<?> c) {
+        boolean result = false;
+        for (Object item : c) {
+            result = remove(item) || result;
+        }
+        return result;
+    }
+
+    @Override
+    public boolean containsAll(Collection<?> c) {
+        for (Object item : c) {
+            if (!contains(item)) return false;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean addAll(Collection<? extends T> c) {
+        for (T element : c) {
+            append(element);
+        }
+        return true;
+    }
+
+
+
+    @Override
+    public boolean retainAll(Collection<?> c) {
+        var result = false;
+        Iterator<T> iterator = this.iterator();
+        while (iterator.hasNext()) {
+            T item = iterator.next();
+            if (!c.contains(item)) {
+                iterator.remove();
+                result = true;
+            }
+        }
+        return result;
+    }
+
+    @Override
+    public void clear() {
+        head = null;
+        tail = null;
+        size = 0;
+    }
+
     /**
      * Recursively traverse this list and print the node value
      */
@@ -125,5 +221,4 @@ public class LinkedList<T> {
     public void print(){
         printList(head);
     }
-
 }

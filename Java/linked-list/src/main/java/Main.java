@@ -1,5 +1,7 @@
+import java.util.ArrayList;
+
 public class Main {
-    public static void main(String[] args){
+    public static void main(String[] args) {
 
         LinkedList<String> list0 = new LinkedList<>();
         list0.push("Manish");
@@ -7,7 +9,7 @@ public class Main {
         list0.push("Tanvi");
         list0.print();
 
-        System.out.println("list size: " + list0.length());
+        System.out.println("list size: " + list0.size());
         System.out.println("list head value: " + list0.getHead().getData());
 
         System.out.println("***********************************");
@@ -31,7 +33,7 @@ public class Main {
         System.out.println("Before inserting: ");
         list3.print();
         Node<Integer> middleNode = list3.nodeAt(1);
-        for (int i=1; i <= 3; i++) {
+        for (int i = 1; i <= 3; i++) {
             middleNode = list3.insert(-1 * i, middleNode);
         }
         System.out.println("After inserting:");
@@ -71,5 +73,63 @@ public class Main {
         System.out.println("After remove the node at index: " + index);
         list6.print();
         System.out.println("removed value: " + removedValueAt);
+
+        System.out.println("***********************************");
+
+        LinkedList<String> list7 = new LinkedList<>();
+
+        list7.push("abc");
+        list7.push("mno");
+        list7.push("pqr");
+        list7.push("xyz");
+
+        // Iterate through the list using For Each Loop
+        for (String str : list7)
+            System.out.println(str);
+
+        Utils.printList(list7);
+
+        System.out.println("***********************************");
+
+        LinkedList<Integer> list8 = new LinkedList<>();
+        list8.add(3);
+        list8.add(2);
+        list8.add(1);
+        Utils.printList(list8);
+        list8.remove(1);
+        Utils.printList(list8);
+
+        System.out.println("***********************************");
+
+        LinkedList<Integer> list9 = new LinkedList<>();
+        list9.add(3);
+        list9.add(2);
+        list9.add(1);
+        list9.add(4);
+        list9.add(5);
+        Utils.printList(list9);
+        ArrayList<Integer> lst = new ArrayList<>();
+        lst.add(3);
+        lst.add(4);
+        lst.add(5);
+        list9.retainAll(lst);
+        Utils.printList(list9);
+
+        System.out.println("***********************************");
+
+        LinkedList<Integer> list10 = new LinkedList<>();
+        list10.add(3);
+        list10.add(2);
+        list10.add(1);
+        list10.add(4);
+        list10.add(5);
+        Utils.printList(list10);
+        ArrayList<Integer> ls = new ArrayList<>();
+        ls.add(3);
+        ls.add(4);
+        ls.add(5);
+        list10.removeAll(ls);
+        Utils.printList(list10);
+
     }
 }
