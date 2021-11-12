@@ -1,4 +1,7 @@
 fun main(){
+
+    println("\n*** Linked list data structure code ***\n")
+
     "creating and linking nodes" example {
         val node1 = Node(value = 1)
         val node2 = Node(value = 2)

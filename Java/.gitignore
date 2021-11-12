@@ -1,9 +1,13 @@
 #idea folder
 .idea/
 
+#out folder
+out/
+
 ### Gradle ###
 .gradle
 /build/
+
 
 # Ignore Gradle GUI config
 gradle-app.setting
@@ -16,6 +20,9 @@ gradle-app.setting
 
 # Log file
 *.log
+
+# iml file
+*.iml
 
 # Package Files
 *.jar
