@@ -29,5 +29,41 @@ public class Main {
         System.out.println(paulGE.toString());
 
         System.out.println(scoreboard.toString());
+
+        System.out.println("\n****** Clone Array ******");
+
+        int[] data = {2, 3, 5, 7, 11, 13, 17, 19};
+        int[] backup;
+        int[] cloneData;
+        backup = data;
+        cloneData = data.clone();
+
+        printIntArray(data);
+        printIntArray(backup);
+        printIntArray(cloneData);
+
+        data[2] = 6587;
+
+        System.out.println("\n************");
+
+        printIntArray(data);
+        printIntArray(backup);
+        printIntArray(cloneData);
+
+    }
+
+    static void printIntArray(int[] arr){
+        System.out.print("[");
+        for (int i: arr){
+            System.out.print(" " + i + ",");
+        }
+        System.out.print("]\n");
+    }
+
+    public static int[ ][ ] deepClone(int[ ][ ] original) {
+        int[ ][ ] backup = new int[original.length][ ]; // create top-level array of arrays
+        for (int k=0; k < original.length; k++)
+            backup[k] = original[k].clone(); // copy row k
+        return backup;
     }
 }
