@@ -36,6 +36,16 @@ public class SinglyLinkedList<E> {
         size++;
     }
 
+    public Node<E> nodeAt(int index){
+        Node<E> currentNode = head;
+        int currentIndex = 0;
+        while (currentNode != null && currentIndex < index) {
+            currentNode = currentNode.getNext();
+            currentIndex++;
+        }
+        return currentNode;
+    }
+
     public E removeFirst(){
         if (isEmpty()) return null;
         E answer = head.getElement();
@@ -46,7 +56,7 @@ public class SinglyLinkedList<E> {
         return answer;
     }
 
-    private static class Node<E>{
+    static class Node<E>{
         private E element;
         private Node<E> next;
         public Node(E e, Node<E> n){
